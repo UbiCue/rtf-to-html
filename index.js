@@ -23,7 +23,8 @@ function fromStream (stream, opts, cb) {
 }
 
 function fromString (string, opts, cb) {
-  console.log("fromString: "+string);
+  console.log("FROMSTRING");
+  //console.log("fromString: "+string);
   if (arguments.length === 2) {
     cb = opts
     opts = null
