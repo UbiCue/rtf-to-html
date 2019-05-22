@@ -156,7 +156,7 @@ function renderPara (para, defaults) {
         //Allow for a single span, not organized in a paragraph
         paraContent = `${tags.open}${para.value}${tags.close}`;
         //console.log("Use value: " + para.value);
-        return `<${paraTag}${style ? ' style="' + style + '"' : ''}>${paraContent}</${paraTag}>`
+        return `<${paraTag}${style ? style : ''}>${paraContent}</${paraTag}>`
   }
   else {
         //A true paragraph will contain one or more spans
@@ -164,7 +164,7 @@ function renderPara (para, defaults) {
         if (paraContent.length < 1) {
             paraContent = "&nbsp;";
         }
-        return `<${paraTag}${style ? ' style="' + style + '"' : ''}>${tags.open}${para.content.map(span => renderSpan(span, pdefaults)).join('')}${tags.close}</${paraTag}>`
+        return `<${paraTag}${style ? style : ''}>${tags.open}${para.content.map(span => renderSpan(span, pdefaults)).join('')}${tags.close}</${paraTag}>`
   }
 }
 
