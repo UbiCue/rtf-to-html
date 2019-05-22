@@ -96,6 +96,7 @@ function paragraphStyles(chunk, defaults) {
    if (chunk.style.align != null && chunk.style.align !== undefined && chunk.style.align !== defaults.align) {
     	css += `text-align: ${chunk.style.align};`
    }
+   return css;
 }
 
 function styleTags (chunk, defaults) {
