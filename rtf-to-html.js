@@ -132,7 +132,16 @@ function styleTags (chunk, defaults) {
 }
 
 function renderPara (para, defaults) {
-  if (para === null || para === undefined || !para.content || para.content.length === 0) return
+  var isSpan = false;
+  if (para === null || para === undefined || !para.content || para.content.length === 0 || (typeof para.content == 'undefined')) {	
+	  if ((para.value) && (para.value.length > 0)) {
+		  isSpan = true;
+	  }
+	  else {
+		  return;
+	  }
+  }
+  
   var style = CSS(para, defaults)
   const tags = styleTags(para, defaults)
   const pdefaults = Object.assign({}, defaults)
@@ -143,10 +152,11 @@ function renderPara (para, defaults) {
   
   style = style ? ' style="' + style + '"' : '';
   var paraContent;
-  if (typeof para.content == 'undefined') {
+  if (isSpan) {
         //Allow for a single span, not organized in a paragraph
         paraContent = `${tags.open}${para.value}${tags.close}`;
         //console.log("Use value: " + para.value);
+        return `<${paraTag}${style ? ' style="' + style + '"' : ''}>${paraContent}</${paraTag}>`
   }
   else {
         //A true paragraph will contain one or more spans
@@ -154,9 +164,8 @@ function renderPara (para, defaults) {
         if (paraContent.length < 1) {
             paraContent = "&nbsp;";
         }
+        return `<${paraTag}${style ? ' style="' + style + '"' : ''}>${tags.open}${para.content.map(span => renderSpan(span, pdefaults)).join('')}${tags.close}</${paraTag}>`
   }
-  
-  return `<${paraTag}${style ? ' style="' + style + '"' : ''}>${tags.open}${para.content.map(span => renderSpan(span, pdefaults)).join('')}${tags.close}</${paraTag}>`
 }
 
 function renderSpan (span, defaults) {
