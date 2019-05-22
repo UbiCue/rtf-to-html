@@ -76,15 +76,6 @@ function CSS (chunk, defaults) {
   if (chunk.style.background != null && chunk.style.background !== undefined && !colorEq(chunk.style.background, defaults.background)) {
     css += `background-color: rgb(${chunk.style.background.red}, ${chunk.style.background.green}, ${chunk.style.background.blue});`
   }
-  if (chunk.style.firstLineIndent != null && chunk.style.firstLineIndent !== undefined && chunk.style.firstLineIndent > 0 && chunk.style.firstLineIndent !== defaults.firstLineIndent) {
-    css += `text-indent: ${chunk.style.firstLineIndent / 20}pt;`
-  }
-  if (chunk.style.indent != null && chunk.style.indent !== undefined && chunk.style.indent !== defaults.indent) {
-    css += `padding-left: ${chunk.style.indent / 20}pt;`
-  }
-  if (chunk.style.align != null && chunk.style.align !== undefined && chunk.style.align !== defaults.align) {
-    css += `text-align: ${chunk.style.align};`
-  }
   if (chunk.style.fontSize != null && chunk.style.fontSize !== undefined && chunk.style.fontSize !== defaults.fontSize) {
     css += `font-size: ${chunk.style.fontSize / 2}pt;`
   }
@@ -92,6 +83,19 @@ function CSS (chunk, defaults) {
     css += font(chunk.style.font)
   }
   return css
+}
+
+function paragraphStyles(chunk, defaults) {
+   let css = CSS(chunk, defaults);
+   if (chunk.style.firstLineIndent != null && chunk.style.firstLineIndent !== undefined && chunk.style.firstLineIndent > 0 && chunk.style.firstLineIndent !== defaults.firstLineIndent) {
+	css += `text-indent: ${chunk.style.firstLineIndent / 20}pt;`
+   }
+   if (chunk.style.indent != null && chunk.style.indent !== undefined && chunk.style.indent !== defaults.indent) {
+   	css += `padding-left: ${chunk.style.indent / 20}pt;`
+   }
+   if (chunk.style.align != null && chunk.style.align !== undefined && chunk.style.align !== defaults.align) {
+    	css += `text-align: ${chunk.style.align};`
+   }
 }
 
 function styleTags (chunk, defaults) {
@@ -142,7 +146,7 @@ function renderPara (para, defaults) {
 	  }
   }
   
-  var style = CSS(para, defaults)
+  var style = paragraphStyles(para, defaults)
   const tags = styleTags(para, defaults)
   const pdefaults = Object.assign({}, defaults)
   for (let item of Object.keys(para.style)) {
