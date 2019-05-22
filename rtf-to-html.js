@@ -99,6 +99,30 @@ function paragraphStyles(chunk, defaults) {
    return css;
 }
 
+function setIndents(parStyle, spanStyle) {
+	if (spanStyle.firstLineIndent != null && spanStyle.firstLineIndent !== undefined) {
+		if (parStyle.firstLineIndent == null || parStyle.firstLineIndent == undefined) {
+			parStyle.firstLineIndent = spanStyle.firstLineIndent;
+		}
+		else {
+			if (spanStyle.firstLineIndent > parStyle.firstLineIndent) {
+				parStyle.firstLineIndent = spanStyle.firstLineIndent;
+			}
+		}
+	}
+	if (spanStyle.indent != null && spanStyle.indent !== undefined) {
+		if (parStyle.indent == null || parStyle.indent == undefined) {
+			parStyle.indent = spanStyle.indent;
+		}
+		else {
+			if (spanStyle.indent > parStyle.indent) {
+				parStyle.indent = spanStyle.indent;
+			}
+		}
+	}
+	return parStyle;
+}
+
 function styleTags (chunk, defaults) {
   let open = ''
   let close = ''
@@ -147,6 +171,10 @@ function renderPara (para, defaults) {
 	  }
   }
   
+  for (var i=0; i<para.content.length; i++) {
+     //Transfer indent information from internal spans to the paragraph element
+     para.style = setIndents(para.style, para.content[i].style);
+  }
   var style = paragraphStyles(para, defaults)
   const tags = styleTags(para, defaults)
   const pdefaults = Object.assign({}, defaults)
