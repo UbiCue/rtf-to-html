@@ -91,7 +91,7 @@ function paragraphStyles(chunk, defaults) {
 	css += `text-indent: ${chunk.style.firstLineIndent / 20}pt;`
    }
    if (chunk.style.indent != null && chunk.style.indent !== undefined && chunk.style.indent !== defaults.indent) {
-   	css += `padding-left: ${12+(chunk.style.indent / 20)}pt;`
+   	css += `padding-left: ${chunk.style.indent / 20}pt;`
    }
    if (chunk.style.align != null && chunk.style.align !== undefined && chunk.style.align !== defaults.align) {
     	css += `text-align: ${chunk.style.align};`
