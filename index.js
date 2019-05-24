@@ -31,7 +31,7 @@ function fromString (string, opts, cb) {
 }
 
 function htmlifyresult (opts, cb) {
-  return (err, doc) => {
+  return function (err, doc) {
     if (err) return cb(err)
     try {
       return cb(null, rtfToHTML(doc, opts))
