@@ -139,7 +139,7 @@ function styleTags (chunk, defaults) {
       open += '<sub>'
       close = '</sub>' + close
   }
-  return {open, close}
+  return {open: open, close: close}
 }
 
 function renderPara (para, defaults) {
