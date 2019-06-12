@@ -53,13 +53,13 @@ function colorEq (aa, bb) {
 function CSS (chunk, defaults) {
   let css = ''
   if (chunk.style.foreground != null && chunk.style.foreground !== undefined && !colorEq(chunk.style.foreground, defaults.foreground)) {
-    css += `color: rgb(${chunk.style.foreground.red}, ${chunk.style.foreground.green}, ${chunk.style.foreground.blue});`
+    css += 'color: rgb('+chunk.style.foreground.red+', '+chunk.style.foreground.green+', '+chunk.style.foreground.blue+');'
   }
   if (chunk.style.background != null && chunk.style.background !== undefined && !colorEq(chunk.style.background, defaults.background)) {
-    css += `background-color: rgb(${chunk.style.background.red}, ${chunk.style.background.green}, ${chunk.style.background.blue});`
+    css += 'background-color: rgb('+chunk.style.background.red+', '+chunk.style.background.green"=, '+chunk.style.background.blue+');'
   }
   if (chunk.style.fontSize != null && chunk.style.fontSize !== undefined && chunk.style.fontSize !== defaults.fontSize) {
-    css += `font-size: ${chunk.style.fontSize / 2}pt;`
+    css += 'font-size: '+chunk.style.fontSize / 2+'pt;'
   }
   if (!defaults.disableFonts && chunk.style.font != null && chunk.style.font !== undefined && chunk.style.font.name !== defaults.font.name) {
     css += font(chunk.style.font)
@@ -70,13 +70,13 @@ function CSS (chunk, defaults) {
 function paragraphStyles(chunk, defaults) {
    let css = CSS(chunk, defaults);
    if (chunk.style.firstLineIndent != null && chunk.style.firstLineIndent !== undefined && chunk.style.firstLineIndent != 0 && chunk.style.firstLineIndent !== defaults.firstLineIndent) {
-	css += `text-indent: ${chunk.style.firstLineIndent / 20}pt;`
+	css += 'text-indent: '+chunk.style.firstLineIndent / 20+'pt;'
    }
    if (chunk.style.indent != null && chunk.style.indent !== undefined && chunk.style.indent !== defaults.indent) {
-   	css += `padding-left: ${chunk.style.indent / 20}pt;`
+   	css += 'padding-left: '+chunk.style.indent / 20+'pt;'
    }
    if (chunk.style.align != null && chunk.style.align !== undefined && chunk.style.align !== defaults.align) {
-    	css += `text-align: ${chunk.style.align};`
+    	css += 'text-align: '+chunk.style.align+';'
    }
    return css;
 }
@@ -174,7 +174,7 @@ function renderPara (para, defaults) {
         //Allow for a single span, not organized in a paragraph
         paraContent = `${tags.open}${para.value}${tags.close}`;
         //console.log("Use value: " + para.value);
-        return `<${paraTag}${style ? style : ''}>${paraContent}</${paraTag}>`
+        return '<'+paraTag+(style ? style : '')+'>'+paraContent+'</'+paraTag+'>'
   }
   else {
         //A true paragraph will contain one or more spans
@@ -182,16 +182,16 @@ function renderPara (para, defaults) {
         if (paraContent.length < 1) {
             paraContent = "&nbsp;";
         }
-        return `<${paraTag}${style ? style : ''}>${tags.open}${para.content.map(span => renderSpan(span, pdefaults)).join('')}${tags.close}</${paraTag}>`
+        return '<'+paraTag+(style ? style : '')+'>'+tags.open+para.content.map(function(span) {return renderSpan(span, pdefaults)}).join('')+tags.close+'</'+paraTag+'>'
   }
 }
 
 function renderSpan (span, defaults) {
   const style = CSS(span, defaults)
   const tags = styleTags(span, defaults)
-  const value = `${tags.open}${span.value}${tags.close}`
+  const value = 'tags.open+span.value+tags.close'
   if (style) {
-    return `<span style="${style}">${value}</span>`
+    return '<span style="'+style+'">'+value+'</span>'
   } else {
     return value
   }
