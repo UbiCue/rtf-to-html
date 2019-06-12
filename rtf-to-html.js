@@ -56,7 +56,7 @@ function CSS (chunk, defaults) {
     css += 'color: rgb('+chunk.style.foreground.red+', '+chunk.style.foreground.green+', '+chunk.style.foreground.blue+');'
   }
   if (chunk.style.background != null && chunk.style.background !== undefined && !colorEq(chunk.style.background, defaults.background)) {
-    css += 'background-color: rgb('+chunk.style.background.red+', '+chunk.style.background.green"=, '+chunk.style.background.blue+');'
+    css += 'background-color: rgb('+chunk.style.background.red+', '+chunk.style.background.green+'=, '+chunk.style.background.blue+');'
   }
   if (chunk.style.fontSize != null && chunk.style.fontSize !== undefined && chunk.style.fontSize !== defaults.fontSize) {
     css += 'font-size: '+chunk.style.fontSize / 2+'pt;'
