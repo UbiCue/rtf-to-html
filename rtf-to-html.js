@@ -33,7 +33,7 @@ function font (ft) {
   const name = ft.name.replace(/-\w+$/, '')
   const family = genericFontMap[ft.family]
   if (name === 'ZapfDingbatsITC') return ''
-  return 'font-family: ' + name + (family ? `, ${family}` : '')
+  return 'font-family: ' + name + (family ? ', '+family : '')
 }
 
 const genericFontMap = {
