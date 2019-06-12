@@ -1,9 +1,9 @@
 'use strict'
 module.exports = rtfToHTML
 
-function outputTemplate (doc, defaults, content) {
+/*function outputTemplate (doc, defaults, content) {
   return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style> body { margin-left: ${doc.marginLeft / 20}pt;  margin-right: ${doc.marginRight / 20}pt;      margin-top: ${doc.marginTop / 20}pt;      margin-bottom: ${doc.marginBottom / 20}pt;      font-size: ${defaults.fontSize / 2}pt;      text-indent: ${defaults.firstLineIndent / 20}pt;    }    </style>  </head>  <body>    ${content.replace(/\n/, '\n    ')}  </body></html>'
-}
+}*/
 
 function rtfToHTML (doc, options) {
   const defaults = Object.assign({
@@ -25,7 +25,8 @@ function rtfToHTML (doc, options) {
     template: outputTemplate
   }, options || {})
   const content = doc.content.map(para => renderPara(para, defaults)).filter(html => html != null).join(defaults.paraBreaks)
-  return defaults.template(doc, defaults, content)
+  //return defaults.template(doc, defaults, content)
+  return content
 }
 
 function font (ft) {
