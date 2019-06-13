@@ -21,8 +21,8 @@ function rtfToHTML (doc, options) {
     valign: 'normal',
 
     paraBreaks: '\n\n',
-    paraTag: 'p',
-    template: outputTemplate
+    paraTag: 'p'
+    //,template: outputTemplate
   }, options || {})
   const content = doc.content.map(function (para) { return renderPara(para, defaults) }).filter(function (html) { return html != null }).join(defaults.paraBreaks)
   //return defaults.template(doc, defaults, content)
