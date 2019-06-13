@@ -6,27 +6,32 @@ module.exports = rtfToHTML
 }*/
 
 function rtfToHTML (doc, options) {
-  const defaults = Object.assign({
-    font: doc.style.font || {name: 'Times', family: 'roman'},
-    fontSize: doc.style.fontSize || 24,
-    bold: false,
-    italic: false,
-    underline: false,
-    strikethrough: false,
-    foreground: {red: 0, blue: 0, green: 0},
-    background: {red: 255, blue: 255, green: 255},
-    firstLineIndent: doc.style.firstLineIndent || 0,
-    indent: 0,
-    align: 'left',
-    valign: 'normal',
+  	const defaults = {
+	    font: doc.style.font || {name: 'Times', family: 'roman'},
+	    fontSize: doc.style.fontSize || 24,
+	    bold: false,
+	    italic: false,
+	    underline: false,
+	    strikethrough: false,
+	    foreground: {red: 0, blue: 0, green: 0},
+	    background: {red: 255, blue: 255, green: 255},
+	    firstLineIndent: doc.style.firstLineIndent || 0,
+	    indent: 0,
+	    align: 'left',
+	    valign: 'normal',
 
-    paraBreaks: '\n\n',
-    paraTag: 'p'
-    //,template: outputTemplate
-  }, options || {})
-  const content = doc.content.map(function (para) { return renderPara(para, defaults) }).filter(function (html) { return html != null }).join(defaults.paraBreaks)
-  //return defaults.template(doc, defaults, content)
-  return content
+	    paraBreaks: '\n\n',
+	    paraTag: 'p'
+	    //,template: outputTemplate
+  	};
+	if (options !== undefined) {
+		for (var attr in options) {
+        		if (options.hasOwnProperty(attr)) defaults[attr] = options[attr];
+    		}
+	}
+  	const content = doc.content.map(function (para) { return renderPara(para, defaults) }).filter(function (html) { return html != null }).join(defaults.paraBreaks)
+	//return defaults.template(doc, defaults, content)
+	return content
 }
 
 function font (ft) {
