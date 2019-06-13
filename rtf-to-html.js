@@ -167,7 +167,12 @@ function renderPara (para, defaults) {
   }
   var style = paragraphStyles(para, defaults)
   const tags = styleTags(para, defaults)
-  const pdefaults = Object.assign({}, defaults)
+  const pdefaults = {};
+  if (defaults !== undefined) {
+	for (var attr in defaults) {
+		if (defaults.hasOwnProperty(attr)) pdefaults[attr] = defaults[attr];
+	}
+  }
   for (var i=0; i<Object.keys(para.style).length; i++) {
 	let item = Object.keys(para.style)[i];
     	if (para.style[item] != null && para.style[item] != undefined) pdefaults[item] = para.style[item];
