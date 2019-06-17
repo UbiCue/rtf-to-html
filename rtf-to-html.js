@@ -193,7 +193,8 @@ function renderPara (para, defaults) {
         if (paraContent.length < 1) {
             paraContent = "&nbsp;";
         }
-        return '<'+paraTag+(style ? style : '')+'>'+tags.open+para.content.map(function(span) {return renderSpan(span, pdefaults)}).join('')+tags.close+'</'+paraTag+'>'
+        //return '<'+paraTag+(style ? style : '')+'>'+tags.open+para.content.map(function(span) {return renderSpan(span, pdefaults)}).join('')+tags.close+'</'+paraTag+'>'
+	  return '<'+paraTag+(style ? style : '')+'>'+para.content.map(function(span) {return renderSpan(span, pdefaults)}).join('')+'</'+paraTag+'>'
   }
 }
 
