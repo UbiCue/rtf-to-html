@@ -161,9 +161,11 @@ function renderPara (para, defaults) {
   //Reset indent
   para.style.indent = defaults.indent;
   para.style.firstLineIndent = defaults.firstLineIndent;
-  for (var i=0; i<para.content.length; i++) {
-     //Transfer indent information from internal spans to the paragraph element
-     para.style = setIndents(para.style, para.content[i].style);
+  if (para.content !== undefined) {
+	  for (var i=0; i<para.content.length; i++) {
+	     //Transfer indent information from internal spans to the paragraph element
+	     para.style = setIndents(para.style, para.content[i].style);
+	  }
   }
   var style = paragraphStyles(para, defaults)
   const tags = styleTags(para, defaults)
