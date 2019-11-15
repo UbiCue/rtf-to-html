@@ -148,15 +148,23 @@ function styleTags (chunk, defaults) {
 }
 
 function renderPara (para, defaults) {
-  var isSpan = false;
-  if (para === null || para === undefined || !para.content || para.content.length === 0 || (typeof para.content == 'undefined')) {	
-	  if ((para.value) && (para.value.length > 0)) {
-		  isSpan = true;
-	  }
-	  else {
-		  return;
-	  }
-  }
+  if (para === null || para === undefined) {
+		return;
+	}
+  
+	para.style.paddingBottom = '6px';
+	var isSpan = false;
+	const paraTag = defaults.paraTag;
+	
+	if (!para.content || para.content.length === 0 || (typeof para.content == 'undefined')) {	
+		if ((para.value) && (para.value.length > 0)) {
+			isSpan = true;
+		  }
+		else {
+			//Add a blank paragraph
+			return '<p style="padding-bottom: 6px" />'
+		}
+	}
   
   //Reset indent
   para.style.indent = defaults.indent;
@@ -179,7 +187,6 @@ function renderPara (para, defaults) {
 	let item = Object.keys(para.style)[i];
     	if (para.style[item] != null && para.style[item] != undefined) pdefaults[item] = para.style[item];
   }
-  const paraTag = defaults.paraTag
   
   style = style ? ' style="' + style + '"' : '';
   var paraContent;
