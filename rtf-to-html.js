@@ -17,6 +17,7 @@ function rtfToHTML (doc, options) {
 	    background: {red: 255, blue: 255, green: 255},
 	    firstLineIndent: doc.style.firstLineIndent || 0,
 	    indent: 0,
+		rightindent: 0,
 	    align: 'left',
 	    valign: 'normal',
 
@@ -80,6 +81,9 @@ function paragraphStyles(chunk, defaults) {
    if (chunk.style.indent != null && chunk.style.indent !== undefined && chunk.style.indent !== defaults.indent) {
    	css += 'padding-left: '+chunk.style.indent / 20+'pt;'
    }
+   if (chunk.style.rightindent != null && chunk.style.rightindent !== undefined && chunk.style.rightindent !== defaults.rightindent) {
+   	css += 'padding-right: '+chunk.style.rightindent / 20+'pt;'
+   }
    if (chunk.style.align != null && chunk.style.align !== undefined && chunk.style.align !== defaults.align) {
     	css += 'text-align: '+chunk.style.align+';'
    }
@@ -104,6 +108,16 @@ function setIndents(parStyle, spanStyle) {
 		else {
 			if (spanStyle.indent > parStyle.indent) {
 				parStyle.indent = spanStyle.indent;
+			}
+		}
+	}
+	if (spanStyle.rightindent != null && spanStyle.rightindent !== undefined) {
+		if (parStyle.rightindent == null || parStyle.rightindent == undefined) {
+			parStyle.rightindent = spanStyle.rightindent;
+		}
+		else {
+			if (spanStyle.rightindent > parStyle.rightindent) {
+				parStyle.rightindent = spanStyle.rightindent;
 			}
 		}
 	}
@@ -169,6 +183,7 @@ function renderPara (para, defaults) {
   //Reset indent
   para.style.indent = defaults.indent;
   para.style.firstLineIndent = defaults.firstLineIndent;
+  para.style.rightindent = defaults.rightindent;
   if (para.content !== undefined) {
 	  for (var i=0; i<para.content.length; i++) {
 	     //Transfer indent information from internal spans to the paragraph element
