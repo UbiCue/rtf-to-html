@@ -37,7 +37,7 @@ function rtfToHTML (doc, options) {
 	for (var i=0; i<doc.errors.length; i++) {
 		var errSpan = document.createElement("span");
 		errSpan.innerText = doc.errors[i];
-		errSpan.style.visibility = "hidden";
+		errSpan.style.display = "none";
 		errSpan.classList.add("error");
 		errDiv.appendChild(errSpan);
 	}
