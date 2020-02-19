@@ -32,6 +32,17 @@ function rtfToHTML (doc, options) {
 	}
   	const content = doc.content.map(function (para) { return renderPara(para, defaults) }).filter(function (html) { return html != null }).join(defaults.paraBreaks)
 	//return defaults.template(doc, defaults, content)
+	
+	var errDiv = document.createElement("div");
+	for (var i=0; i<doc.errors.length; i++) {
+		var errSpan = document.createElement("span");
+		errSpan.innerText = doc.errors[i];
+		errSpan.style.visibility = "hidden";
+		errSpan.classList.add("error");
+		errDiv.appendChild(errSpan);
+	}
+	content += errDiv.innerHTML;
+	
 	return content
 }
 
