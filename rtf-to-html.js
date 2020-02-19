@@ -30,7 +30,7 @@ function rtfToHTML (doc, options) {
         		if (options.hasOwnProperty(attr)) defaults[attr] = options[attr];
     		}
 	}
-  	const content = doc.content.map(function (para) { return renderPara(para, defaults) }).filter(function (html) { return html != null }).join(defaults.paraBreaks)
+  	var content = doc.content.map(function (para) { return renderPara(para, defaults) }).filter(function (html) { return html != null }).join(defaults.paraBreaks)
 	//return defaults.template(doc, defaults, content)
 	
 	var errDiv = document.createElement("div");
